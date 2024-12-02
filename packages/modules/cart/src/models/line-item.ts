@@ -20,6 +20,7 @@ const LineItem = model
       product_type: model.text().nullable(),
       product_type_id: model.text().nullable(),
       product_collection: model.text().nullable(),
+      product_handle: model.text().nullable(),
       variant_sku: model.text().nullable(),
       variant_barcode: model.text().nullable(),
       variant_title: model.text().nullable(),

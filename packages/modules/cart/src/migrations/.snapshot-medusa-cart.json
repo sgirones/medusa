@@ -540,6 +540,15 @@
           "nullable": true,
           "mappedType": "text"
         },
+        "product_handle": {
+          "name": "product_handle",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "mappedType": "text"
+        },
         "variant_sku": {
           "name": "variant_sku",
           "type": "text",
