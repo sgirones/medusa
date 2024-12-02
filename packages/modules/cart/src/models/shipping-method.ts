@@ -41,5 +41,6 @@ const ShippingMethod = model
       where: "deleted_at IS NULL AND shipping_option_id IS NOT NULL",
     },
   ])
+  .checks([(columns) => `${columns.amount} >= 0`])
 
 export default ShippingMethod

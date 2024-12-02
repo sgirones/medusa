@@ -1,6 +1,6 @@
 import { Migration } from "@mikro-orm/migrations"
 
-export class Migration20241202092453 extends Migration {
+export class Migration20241202130532 extends Migration {
   async up(): Promise<void> {
     this.addSql(
       'alter table if exists "cart_line_item" drop constraint if exists "cart_line_item_cart_id_foreign";'
@@ -66,9 +66,6 @@ export class Migration20241202092453 extends Migration {
       'CREATE INDEX IF NOT EXISTS "IDX_cart_line_item_tax_line_item_id" ON "cart_line_item_tax_line" (item_id) WHERE deleted_at IS NULL;'
     )
 
-    this.addSql(
-      'alter table if exists "cart_shipping_method" drop constraint if exists cart_shipping_method_check;'
-    )
     this.addSql(
       'alter table if exists "cart_shipping_method" add constraint "cart_shipping_method_cart_id_foreign" foreign key ("cart_id") references "cart" ("id") on update cascade on delete cascade;'
     )
@@ -138,9 +135,6 @@ export class Migration20241202092453 extends Migration {
     this.addSql('drop index if exists "IDX_cart_shipping_method_cart_id";')
     this.addSql(
       'alter table if exists "cart_shipping_method" add constraint "cart_shipping_method_cart_id_foreign" foreign key ("cart_id") references "cart" ("id") on update cascade;'
-    )
-    this.addSql(
-      'alter table if exists "cart_shipping_method" add constraint cart_shipping_method_check check(amount >= 0);'
     )
 
     this.addSql(

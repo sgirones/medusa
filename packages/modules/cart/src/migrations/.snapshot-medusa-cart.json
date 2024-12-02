@@ -1289,7 +1289,13 @@
           "unique": true
         }
       ],
-      "checks": [],
+      "checks": [
+        {
+          "name": "cart_shipping_method_check",
+          "expression": "amount >= 0",
+          "definition": "check ((amount >= 0))"
+        }
+      ],
       "foreignKeys": {
         "cart_shipping_method_cart_id_foreign": {
           "constraintName": "cart_shipping_method_cart_id_foreign",
