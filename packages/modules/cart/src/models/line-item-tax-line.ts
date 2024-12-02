@@ -32,37 +32,4 @@ const LineItemTaxLine = model
     },
   ])
 
-// @Entity({ tableName: "cart_line_item_tax_line" })
-// @Filter(DALUtils.mikroOrmSoftDeletableFilterOptions)
-// export default class LineItemTaxLine extends TaxLine {
-//   @ManyToOne({ entity: () => LineItem, persist: false })
-//   item: Rel<LineItem>
-
-//   @LineItemIdIndex()
-//   @ManyToOne({
-//     entity: () => LineItem,
-//     columnType: "text",
-//     fieldName: "item_id",
-//     mapToPk: true,
-//   })
-//   item_id: string
-
-// @TaxRateIdIndex()
-// @Property({ columnType: "text", nullable: true })
-// tax_rate_id: string | null = null
-
-// @DeletedAtIndex()
-// @Property({ columnType: "timestamptz", nullable: true })
-// deleted_at: Date | null = null
-
-// @BeforeCreate()
-// onCreate() {
-//   this.id = generateEntityId(this.id, "calitxl")
-// }
-
-// @OnInit()
-// onInit() {
-//   this.id = generateEntityId(this.id, "calitxl")
-// }
-// }
 export default LineItemTaxLine

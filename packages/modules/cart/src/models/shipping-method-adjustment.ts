@@ -33,37 +33,4 @@ const ShippingMethodAdjustment = model
     },
   ])
 
-// @Entity({ tableName: "cart_shipping_method_adjustment" })
-// @Filter(DALUtils.mikroOrmSoftDeletableFilterOptions)
-// export default class ShippingMethodAdjustment extends AdjustmentLine {
-// @ManyToOne({ entity: () => ShippingMethod, persist: false })
-// shipping_method: Rel<ShippingMethod>
-
-// @ShippingMethodIdIndex()
-// @ManyToOne({
-//   entity: () => ShippingMethod,
-//   columnType: "text",
-//   fieldName: "shipping_method_id",
-//   mapToPk: true,
-// })
-// shipping_method_id: string
-
-// @PromotionIdIndex()
-// @Property({ columnType: "text", nullable: true })
-// promotion_id: string | null = null
-
-// @DeletedAtIndex()
-// @Property({ columnType: "timestamptz", nullable: true })
-// deleted_at: Date | null = null
-
-// @BeforeCreate()
-// onCreate() {
-//   this.id = generateEntityId(this.id, "casmadj")
-// }
-
-// @OnInit()
-// onInit() {
-//   this.id = generateEntityId(this.id, "casmadj")
-// }
-// }
 export default ShippingMethodAdjustment

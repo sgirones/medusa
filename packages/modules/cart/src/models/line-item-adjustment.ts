@@ -30,35 +30,4 @@ const LineItemAdjustment = model
     },
   ])
 
-// @Entity({ tableName: "cart_line_item_adjustment" })
-// @Check<LineItemAdjustment>({
-//   expression: (columns) => `${columns.amount} >= 0`,
-// })
-// @Filter(DALUtils.mikroOrmSoftDeletableFilterOptions)
-// export default class LineItemAdjustment extends AdjustmentLine {
-// @ManyToOne({ entity: () => LineItem, persist: false })
-// item: Rel<LineItem>
-// @LineItemIdIndex()
-// @ManyToOne({
-//   entity: () => LineItem,
-//   columnType: "text",
-//   fieldName: "item_id",
-//   mapToPk: true,
-// })
-// item_id: string
-// @PromotionIdIndex()
-// @Property({ columnType: "text", nullable: true })
-// promotion_id: string | null = null
-// @DeletedAtIndex()
-// @Property({ columnType: "timestamptz", nullable: true })
-// deleted_at: Date | null = null
-// @BeforeCreate()
-// onCreate() {
-//   this.id = generateEntityId(this.id, "caliadj")
-// }
-// @OnInit()
-// onInit() {
-//   this.id = generateEntityId(this.id, "caliadj")
-// }
-// }
 export default LineItemAdjustment
