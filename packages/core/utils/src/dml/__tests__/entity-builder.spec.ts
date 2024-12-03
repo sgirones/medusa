@@ -2603,6 +2603,7 @@ describe("Entity builder", () => {
           nullable: false,
           mappedBy: "user",
           cascade: ["persist", "soft-remove"],
+          onDelete: "cascade",
         },
         created_at: {
           reference: "scalar",
@@ -2766,6 +2767,7 @@ describe("Entity builder", () => {
           nullable: false,
           mappedBy: "user",
           cascade: ["persist", "soft-remove"],
+          onDelete: "cascade",
         },
         created_at: {
           reference: "scalar",
@@ -2831,6 +2833,7 @@ describe("Entity builder", () => {
         },
         user: {
           entity: "User",
+          fieldName: "user_id",
           mappedBy: "email",
           name: "user",
           nullable: false,
@@ -2846,7 +2849,6 @@ describe("Entity builder", () => {
           reference: "scalar",
           setter: false,
           type: "string",
-          persist: false,
         },
         created_at: {
           reference: "scalar",
@@ -3776,10 +3778,12 @@ describe("Entity builder", () => {
         },
         user: {
           name: "user",
+          fieldName: "user_id",
           reference: "1:1",
           entity: "User",
           nullable: false,
           mappedBy: "email",
+          onDelete: undefined,
           owner: true,
         },
         user_id: {
@@ -3790,7 +3794,6 @@ describe("Entity builder", () => {
           name: "user_id",
           getter: false,
           setter: false,
-          persist: false,
         },
         created_at: {
           reference: "scalar",
@@ -3972,9 +3975,11 @@ describe("Entity builder", () => {
         },
         user: {
           name: "user",
+          fieldName: "user_id",
           reference: "1:1",
           entity: "User",
           nullable: true,
+          onDelete: undefined,
           mappedBy: "email",
           owner: true,
         },
@@ -3986,7 +3991,6 @@ describe("Entity builder", () => {
           name: "user_id",
           getter: false,
           setter: false,
-          persist: false,
         },
         created_at: {
           reference: "scalar",
@@ -4604,10 +4608,12 @@ describe("Entity builder", () => {
         },
         user: {
           name: "user",
+          fieldName: "user_id",
           reference: "1:1",
           entity: "User",
           nullable: false,
           mappedBy: "email",
+          onDelete: undefined,
           owner: true,
         },
         user_id: {
@@ -4618,7 +4624,6 @@ describe("Entity builder", () => {
           name: "user_id",
           getter: false,
           setter: false,
-          persist: false,
         },
         created_at: {
           reference: "scalar",
@@ -4802,10 +4807,12 @@ describe("Entity builder", () => {
         },
         user: {
           name: "user",
+          fieldName: "user_id",
           reference: "1:1",
           entity: "User",
           nullable: false,
           mappedBy: "email",
+          onDelete: undefined,
           owner: true,
         },
         user_id: {
@@ -4816,7 +4823,6 @@ describe("Entity builder", () => {
           name: "user_id",
           getter: false,
           setter: false,
-          persist: false,
         },
         created_at: {
           reference: "scalar",
@@ -5021,6 +5027,7 @@ describe("Entity builder", () => {
         },
         parent: {
           name: "parent",
+          fieldName: "parent_id",
           mappedBy: "child",
           reference: "1:1",
           entity: "User",
@@ -5032,7 +5039,6 @@ describe("Entity builder", () => {
           name: "parent_id",
           type: "string",
           columnType: "text",
-          persist: false,
           reference: "scalar",
           getter: false,
           setter: false,
