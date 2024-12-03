@@ -7,12 +7,14 @@ import {
 } from "@medusajs/types"
 import {
   BeforeCreate,
+  Cascade,
   ManyToMany,
   ManyToOne,
   OneToMany,
   OneToOne,
   OnInit,
   Property,
+  rel,
 } from "@mikro-orm/core"
 import { camelToSnakeCase, pluralize } from "../../../common"
 import { DmlEntity } from "../../entity"
@@ -229,14 +231,14 @@ export function defineBelongsToRelationship(
        * specifically
        */
       if (HasOne.isHasOne(otherSideRelation)) {
-        // const relationMeta = this.__meta.relations.find(
-        //   (relation) => relation.name === relationship.name
-        // ).targetMeta
-        // this[relationship.name] ??= rel(
-        //   relationMeta.class,
-        //   this[foreignKeyName]
-        // )
-        // this[relationship.name] ??= this[relationship.name]?.id
+        const relationMeta = this.__meta.relations.find(
+          (relation) => relation.name === relationship.name
+        ).targetMeta
+        this[relationship.name] ??= rel(
+          relationMeta.class,
+          this[foreignKeyName]
+        )
+        this[relationship.name] ??= this[relationship.name]?.id
         return
       }
 
@@ -334,6 +336,7 @@ export function defineBelongsToRelationship(
       columnType: "text",
       type: "string",
       nullable: relationship.nullable,
+      persist: false,
     })(MikroORMEntity.prototype, foreignKeyName)
 
     const oneToOneOptions: Parameters<typeof OneToOne>[0] = {
@@ -343,6 +346,10 @@ export function defineBelongsToRelationship(
       fieldName: foreignKeyName,
       owner: true,
       onDelete: shouldCascade ? "cascade" : undefined,
+    }
+
+    if (shouldCascade) {
+      oneToOneOptions.cascade = [Cascade.PERSIST, "soft-remove"] as any
     }
 
     OneToOne(oneToOneOptions)(MikroORMEntity.prototype, relationship.name)

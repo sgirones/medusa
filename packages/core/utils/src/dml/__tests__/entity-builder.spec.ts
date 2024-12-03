@@ -2840,10 +2840,12 @@ describe("Entity builder", () => {
           onDelete: "cascade",
           owner: true,
           reference: "1:1",
+          cascade: ["persist", "soft-remove"],
         },
         user_id: {
           columnType: "text",
           getter: false,
+          persist: false,
           name: "user_id",
           nullable: false,
           reference: "scalar",
@@ -3788,6 +3790,7 @@ describe("Entity builder", () => {
         },
         user_id: {
           reference: "scalar",
+          persist: false,
           type: "string",
           columnType: "text",
           nullable: false,
@@ -3985,6 +3988,7 @@ describe("Entity builder", () => {
         },
         user_id: {
           reference: "scalar",
+          persist: false,
           type: "string",
           columnType: "text",
           nullable: true,
@@ -4619,6 +4623,7 @@ describe("Entity builder", () => {
         user_id: {
           reference: "scalar",
           type: "string",
+          persist: false,
           columnType: "text",
           nullable: false,
           name: "user_id",
@@ -4817,6 +4822,7 @@ describe("Entity builder", () => {
         },
         user_id: {
           reference: "scalar",
+          persist: false,
           type: "string",
           columnType: "text",
           nullable: false,
@@ -5040,6 +5046,7 @@ describe("Entity builder", () => {
           type: "string",
           columnType: "text",
           reference: "scalar",
+          persist: false,
           getter: false,
           setter: false,
           nullable: false,
