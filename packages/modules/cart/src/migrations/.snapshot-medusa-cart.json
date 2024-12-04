@@ -310,20 +310,22 @@
       "schema": "public",
       "indexes": [
         {
-          "keyName": "IDX_cart_shipping_address_id",
-          "columnNames": [],
+          "columnNames": [
+            "shipping_address_id"
+          ],
           "composite": false,
+          "keyName": "cart_shipping_address_id_unique",
           "primary": false,
-          "unique": false,
-          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_cart_shipping_address_id\" ON \"cart\" (shipping_address_id) WHERE deleted_at IS NULL"
+          "unique": true
         },
         {
-          "keyName": "IDX_cart_billing_address_id",
-          "columnNames": [],
+          "columnNames": [
+            "billing_address_id"
+          ],
           "composite": false,
+          "keyName": "cart_billing_address_id_unique",
           "primary": false,
-          "unique": false,
-          "expression": "CREATE INDEX IF NOT EXISTS \"IDX_cart_billing_address_id\" ON \"cart\" (billing_address_id) WHERE deleted_at IS NULL"
+          "unique": true
         },
         {
           "keyName": "IDX_cart_deleted_at",
