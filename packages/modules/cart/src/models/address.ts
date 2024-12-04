@@ -1,5 +1,4 @@
 import { model } from "@medusajs/framework/utils"
-import Cart from "./cart"
 
 const Address = model.define(
   { tableName: "cart_address", name: "Address" },
@@ -17,9 +16,6 @@ const Address = model.define(
     postal_code: model.text().nullable(),
     phone: model.text().nullable(),
     metadata: model.json().nullable(),
-    carts: model.hasMany(() => Cart, {
-      mappedBy: "shipping_address",
-    }),
   }
 )
 

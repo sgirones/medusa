@@ -13,16 +13,10 @@ const Cart = model
     currency_code: model.text(),
     metadata: model.json().nullable(),
     completed_at: model.dateTime().nullable(),
-    shipping_address: model
-      .belongsTo(() => Address, {
-        mappedBy: "carts",
-      })
-      .nullable(),
-    billing_address: model
-      .belongsTo(() => Address, {
-        mappedBy: "carts",
-      })
-      .nullable(),
+    shipping_address_id: model.text().nullable(),
+    billing_address_id: model.text().nullable(),
+    shipping_address: model.hasOne(() => Address).nullable(),
+    billing_address: model.hasOne(() => Address).nullable(),
     items: model.hasMany(() => LineItem, {
       mappedBy: "cart",
     }),
@@ -31,7 +25,12 @@ const Cart = model
     }),
   })
   .cascades({
-    delete: ["items", "shipping_methods"],
+    delete: [
+      "items",
+      "shipping_methods",
+      "shipping_address",
+      "billing_address",
+    ],
   })
   .indexes([
     {
