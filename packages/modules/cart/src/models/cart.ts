@@ -15,8 +15,12 @@ const Cart = model
     completed_at: model.dateTime().nullable(),
     shipping_address_id: model.text().nullable(),
     billing_address_id: model.text().nullable(),
-    shipping_address: model.hasOne(() => Address).nullable(),
-    billing_address: model.hasOne(() => Address).nullable(),
+    shipping_address: model
+      .hasOne(() => Address, { mappedBy: undefined })
+      .nullable(),
+    billing_address: model
+      .hasOne(() => Address, { mappedBy: undefined })
+      .nullable(),
     items: model.hasMany(() => LineItem, {
       mappedBy: "cart",
     }),
