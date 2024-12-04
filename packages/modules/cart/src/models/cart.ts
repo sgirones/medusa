@@ -13,13 +13,17 @@ const Cart = model
     currency_code: model.text(),
     metadata: model.json().nullable(),
     completed_at: model.dateTime().nullable(),
-    shipping_address_id: model.text().nullable(),
-    billing_address_id: model.text().nullable(),
     shipping_address: model
-      .hasOne(() => Address, { mappedBy: undefined })
+      .hasOne(() => Address, {
+        mappedBy: undefined,
+        foreignKey: true,
+      })
       .nullable(),
     billing_address: model
-      .hasOne(() => Address, { mappedBy: undefined })
+      .hasOne(() => Address, {
+        mappedBy: undefined,
+        foreignKey: true,
+      })
       .nullable(),
     items: model.hasMany(() => LineItem, {
       mappedBy: "cart",
@@ -59,12 +63,12 @@ const Cart = model
     },
     {
       name: "IDX_cart_shipping_address_id",
-      on: ["shipping_address_id"],
+      on: ["shipping_address_id" as any],
       where: "deleted_at IS NULL AND shipping_address_id IS NOT NULL",
     },
     {
       name: "IDX_cart_billing_address_id",
-      on: ["billing_address_id"],
+      on: ["billing_address_id" as any],
       where: "deleted_at IS NULL AND billing_address_id IS NOT NULL",
     },
   ])
