@@ -3525,6 +3525,8 @@ describe("Entity builder", () => {
           onDelete: "cascade",
           owner: true,
           reference: "1:1",
+          cascade: ["persist", "soft-remove"],
+          fieldName: "user_id",
         },
         user_id: {
           columnType: "text",
