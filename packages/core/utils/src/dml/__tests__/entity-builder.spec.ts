@@ -2986,6 +2986,7 @@ describe("Entity builder", () => {
         username: model.text(),
         email: model.hasOne(() => email, {
           foreignKey: true,
+          mappedBy: undefined,
         }),
       })
 
@@ -3097,6 +3098,7 @@ describe("Entity builder", () => {
         emails: model
           .hasOne(() => email, {
             foreignKey: true,
+            mappedBy: undefined,
           })
           .nullable(),
       })
@@ -3352,6 +3354,7 @@ describe("Entity builder", () => {
           entity: "Email",
           nullable: false,
           cascade: ["persist", "soft-remove"],
+          mappedBy: "user",
         },
         email_id: {
           columnType: "text",
@@ -3527,6 +3530,7 @@ describe("Entity builder", () => {
           entity: "Email",
           nullable: false,
           cascade: ["persist", "soft-remove"],
+          mappedBy: "user",
         },
         email_id: {
           columnType: "text",

@@ -144,8 +144,7 @@ export function defineHasOneRelationship(
 
   let mappedBy: string | undefined = camelToSnakeCase(MikroORMEntity.name)
   if ("mappedBy" in relationship) {
-    mappedBy =
-      relationship.mappedBy === undefined ? undefined : relationship.mappedBy
+    mappedBy = relationship.mappedBy
   }
 
   OneToOne({
@@ -170,12 +169,10 @@ export function defineHasOneWithFKRelationship(
 ) {
   const foreignKeyName = camelToSnakeCase(`${relationship.name}Id`)
   const shouldRemoveRelated = !!cascades.delete?.includes(relationship.name)
-  let mappedBy: string | undefined
 
+  let mappedBy: string | undefined = camelToSnakeCase(MikroORMEntity.name)
   if ("mappedBy" in relationship) {
     mappedBy = relationship.mappedBy
-  } else {
-    mappedBy = camelToSnakeCase(MikroORMEntity.name)
   }
 
   OneToOne({
@@ -185,7 +182,7 @@ export function defineHasOneWithFKRelationship(
     cascade: shouldRemoveRelated
       ? (["persist", "soft-remove"] as any)
       : undefined,
-  } as any)(MikroORMEntity.prototype, relationship.name)
+  } as OneToOneOptions<any, any>)(MikroORMEntity.prototype, relationship.name)
 
   Property({
     type: "string",
