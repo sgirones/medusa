@@ -148,34 +148,14 @@ export function defineHasOneRelationship(
     mappedBy = camelToSnakeCase(MikroORMEntity.name)
   }
 
-  if (relationship.options.foreignKey) {
-    const foreignKeyName = camelToSnakeCase(`${relationship.name}Id`)
-
-    OneToOne({
-      entity: relatedModelName,
-      nullable: relationship.nullable,
-      ...(mappedBy ? { mappedBy } : {}),
-      cascade: shouldRemoveRelated
-        ? (["persist", "soft-remove"] as any)
-        : undefined,
-    } as any)(MikroORMEntity.prototype, relationship.name)
-
-    Property({
-      type: "string",
-      columnType: "text",
-      nullable: relationship.nullable,
-      persist: true,
-    })(MikroORMEntity.prototype, foreignKeyName)
-  } else {
-    OneToOne({
-      entity: relatedModelName,
-      nullable: relationship.nullable,
-      ...(mappedBy ? { mappedBy } : {}),
-      cascade: shouldRemoveRelated
-        ? (["persist", "soft-remove"] as any)
-        : undefined,
-    } as any)(MikroORMEntity.prototype, relationship.name)
-  }
+  OneToOne({
+    entity: relatedModelName,
+    nullable: relationship.nullable,
+    ...(mappedBy ? { mappedBy } : {}),
+    cascade: shouldRemoveRelated
+      ? (["persist", "soft-remove"] as any)
+      : undefined,
+  } as any)(MikroORMEntity.prototype, relationship.name)
 }
 
 /**

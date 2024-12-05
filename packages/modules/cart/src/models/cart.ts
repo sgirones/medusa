@@ -63,12 +63,12 @@ const Cart = model
     },
     {
       name: "IDX_cart_shipping_address_id",
-      on: ["shipping_address_id" as any],
+      on: ["shipping_address_id"],
       where: "deleted_at IS NULL AND shipping_address_id IS NOT NULL",
     },
     {
       name: "IDX_cart_billing_address_id",
-      on: ["billing_address_id" as any],
+      on: ["billing_address_id"],
       where: "deleted_at IS NULL AND billing_address_id IS NOT NULL",
     },
   ])
