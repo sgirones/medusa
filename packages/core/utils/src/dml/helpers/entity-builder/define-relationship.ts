@@ -7,7 +7,6 @@ import {
 } from "@medusajs/types"
 import {
   BeforeCreate,
-  Cascade,
   ManyToMany,
   ManyToOne,
   OneToMany,
