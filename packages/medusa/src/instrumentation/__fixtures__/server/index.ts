@@ -125,6 +125,7 @@ export const createServer = async (rootDir) => {
           {
             secret: config.projectConfig.http.jwtSecret!,
             expiresIn: "1d",
+            options: config.projectConfig.http.jwtOptions,
           }
         )
 
@@ -144,7 +145,11 @@ export const createServer = async (rootDir) => {
                 opts.clientSession.jwt?.customer_id,
             },
           },
-          { secret: config.projectConfig.http.jwtSecret!, expiresIn: "1d" }
+          {
+            secret: config.projectConfig.http.jwtSecret!,
+            expiresIn: "1d",
+            options: config.projectConfig.http.jwtOptions,
+          }
         )
 
         headers.Authorization = `Bearer ${token}`

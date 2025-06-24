@@ -37,9 +37,10 @@ export const validateToken = () => {
 
     const token = getAuthContextFromJwtToken(
       req.headers.authorization,
-      http.jwtSecret as string,
       ["bearer"],
-      [actor_type]
+      [actor_type],
+      http.jwtSecret as string,
+      http.jwtOptions
     ) as UpdateProviderJwtPayload | null
 
     const errorObject = new MedusaError(

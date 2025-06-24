@@ -43,6 +43,7 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
       {
         secret: http.jwtSecret,
         expiresIn: http.jwtExpiresIn,
+        options: http.jwtOptions,
       }
     )
 

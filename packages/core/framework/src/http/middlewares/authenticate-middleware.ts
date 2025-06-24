@@ -1,7 +1,7 @@
 import { ApiKeyDTO, IApiKeyModuleService } from "@medusajs/types"
 import { ContainerRegistrationKeys, Modules } from "@medusajs/utils"
 import { NextFunction, RequestHandler } from "express"
-import { JwtPayload, verify } from "jsonwebtoken"
+import { JwtPayload, SignOptions, verify, VerifyOptions } from "jsonwebtoken"
 import { ConfigModule } from "../../config"
 import {
   AuthContext,
@@ -74,9 +74,10 @@ export const authenticate = (
 
       authContext = getAuthContextFromJwtToken(
         req.headers.authorization,
-        http.jwtSecret!,
         authTypes,
-        actorTypes
+        actorTypes,
+        http.jwtSecret!.toString(),
+        http.jwtSignOptions
       )
     }
 
@@ -172,9 +173,10 @@ const getAuthContextFromSession = (
 
 export const getAuthContextFromJwtToken = (
   authHeader: string | undefined,
-  jwtSecret: string,
   authTypes: AuthType[],
-  actorTypes: string[]
+  actorTypes: string[],
+  jwtSecret: string,
+  jwtVerifyOptions?: VerifyOptions
 ): AuthContext | null => {
   if (!authTypes.includes(BEARER_AUTH)) {
     return null
@@ -195,7 +197,7 @@ export const getAuthContextFromJwtToken = (
       // get config jwt secret
       // verify token and set authUser
       try {
-        const verified = verify(token, jwtSecret) as JwtPayload
+        const verified = verify(token, jwtSecret, jwtSignOptions) as JwtPayload
         if (isActorTypePermitted(actorTypes, verified.actor_type)) {
           return verified as AuthContext
         }

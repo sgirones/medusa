@@ -4,8 +4,9 @@ import { MedusaError } from "../common"
 export const generateJwtToken = (
   tokenPayload: Record<string, unknown>,
   jwtConfig: {
-    secret: string | undefined
+    secret: jwt.Secret | undefined
     expiresIn: string | undefined
+    options?: jwt.SignOptions
   }
 ) => {
   if (!jwtConfig.secret || !jwtConfig.expiresIn) {
@@ -16,6 +17,7 @@ export const generateJwtToken = (
   }
 
   return jwt.sign(tokenPayload, jwtConfig.secret, {
+    ...(jwtConfig.options ? jwtConfig.options : {}),
     expiresIn: jwtConfig.expiresIn,
   })
 }

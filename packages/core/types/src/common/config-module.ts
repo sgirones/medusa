@@ -2,6 +2,7 @@ import {
   ExternalModuleDeclaration,
   InternalModuleDeclaration,
 } from "../modules-sdk"
+import type jwt from "jsonwebtoken"
 
 import type { RedisOptions } from "ioredis"
 import { ConnectionOptions } from "node:tls"
@@ -487,7 +488,7 @@ export type ProjectConfigOptions = {
    */
   http: {
     /**
-     * A random string used to create authentication tokens in the http layer. Although this configuration option is not required, it’s highly recommended to set it for better security.
+     * A JWT secret used to create authentication tokens in the http layer. Although this configuration option is not required, it’s highly recommended to set it for better security.
      *
      * In a development environment, if this option is not set the default secret is `supersecret`. However, in production, if this configuration is not set, an
      * error is thrown and the application crashes.
@@ -505,7 +506,7 @@ export type ProjectConfigOptions = {
      * })
      * ```
      */
-    jwtSecret?: string
+    jwtSecret?: jwt.Secret
     /**
      * The expiration time for the JWT token. Its format is based off the [ms package](https://github.com/vercel/ms).
      *
@@ -525,6 +526,25 @@ export type ProjectConfigOptions = {
      * ```
      */
     jwtExpiresIn?: string
+    /**
+     * Additional options to pass to the JWT library for signing.
+     *
+     * @example
+     * ```js title="medusa-config.ts"
+     * module.exports = defineConfig({
+     *   projectConfig: {
+     *     http: {
+     *       jwtSignOptions: {
+     *         algorithm: "HS256"
+     *       }
+     *     }
+     *     // ...
+     *   },
+     *   // ...
+     * })
+     * ```
+     */
+    jwtSignOptions?: jwt.SignOptions
     /**
      * A random string used to create cookie tokens in the http layer. Although this configuration option is not required, it’s highly recommended to set it for better security.
      *

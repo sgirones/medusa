@@ -28,6 +28,7 @@ export const POST = async (
     {
       secret: http.jwtSecret,
       expiresIn: http.jwtExpiresIn,
+      options: http.jwtOptions,
     }
   )
 
